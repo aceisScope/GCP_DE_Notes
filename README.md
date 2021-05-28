@@ -326,7 +326,7 @@ Cloud bigtable
 
 ## [Cloud Spanner](https://cloud.google.com/spanner/) (SQL)
 
-Globally consistent cloud database.
+Globally consistent cloud database. Horizontally scalable.
 
 Fully managed.
 
@@ -378,7 +378,7 @@ Eventually consistent. Not for relational data but storing objects.
 
 ## [Cloud Memorystore](https://cloud.google.com/memorystore/) (redis)
 
--   redis as a service
+-   redis as a service, no need to provision VMs
 -   high availablility, failover, patching, and monitoring
 -   sub millisecond latency and throughput
 -   can support up to 300 GB instances with 12 Gbps throughput
@@ -386,6 +386,8 @@ Eventually consistent. Not for relational data but storing objects.
 
 Ideal for low latency data that must be shared between workers. Failover
 is separate zone. Application must be tollerant of failed writes.
+
+User cases include session cache, message queue and pub/sub.
 
 
 # Networking
