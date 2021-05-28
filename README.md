@@ -235,7 +235,7 @@ Use your network to move data to Google Cloud storage
 -   json api inject tool (python api for example)
 
 ## Cloud Storage Transfer Service  
-use for cloud transfters like AWS -&gt; GCP
+use for cloud transfters like: AWS S3, HTTP sources and other GCS buckets 
 
 -   Storage Transfer Service allows you to quickly import online data
     into Cloud Storage. You can also set up a repeating schedule for
@@ -257,15 +257,15 @@ install storage locally move data and send to google
 -   greater than 20 TB it is worth it.
 -   capable of high upload speeds (&gt; 1GB per second)
 
--   Big Query Data Transfer Service
-    -   The BigQuery Data Transfer Service automates data movement from
-        Software as a Service (SaaS) applications such as Google Ads and
-        Google Ad Manager on a scheduled, managed basis. Your analytics
-        team can lay the foundation for a data warehouse without writing
-        a single line of code.
-    -   data sources :: campaign manager, cloud storage, google ad
-        manager, google ads, google play, youtube channel reports,
-        youtube content owner reports.
+## Big Query Data Transfer Service
+-   The BigQuery Data Transfer Service automates data movement from
+    Software as a Service (SaaS) applications such as Google Ads and
+    Google Ad Manager on a scheduled, managed basis. Your analytics
+    team can lay the foundation for a data warehouse without writing
+    a single line of code.
+-   data sources :: campaign manager, cloud storage, google ad
+    manager, google ads, google play, youtube channel reports,
+    youtube content owner reports.
 
 # Databases
 
