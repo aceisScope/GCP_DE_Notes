@@ -334,40 +334,47 @@ Relational Semantics requiring explicit key.
 
 Highly available transactions. Globally replicated.
 
-## [Cloud Firetore](https://cloud.google.com/firestore/) (NoSQL)
+## [Cloud Firetore](https://cloud.google.com/firestore/) (NoSQL, like MongoDB)
 
-SQL like query language. ACID transactions. Fully managed.
+NoSQL document store. Realtime DB with mobile SDKs. SQL like query language. ACID transactions. Fully managed.
 
 Eventually consistent. Not for relational data but storing objects.
 
--   Atomic transactions. Cloud Datastore can execute a set of operations
+-   Data types: 
+    -   string, integer, boolean, float, null
+    -   bytes, date and time, geographical point
+    -   array and map
+    -   *reference*
+-   Automatically create single-field indexes
+-   Atomic transactions. Cloud Firetore can execute a set of operations
     where either all succeed, or none occur.
--   High availability of reads and writes. Cloud Datastore runs in
+-   High availability of reads and writes. Cloud Firetore runs in
     Google data centers, which use redundancy to minimize impact from
     points of failure.
--   Massive scalability with high performance. Cloud Datastore uses a
+-   Massive scalability with high performance. Cloud Firetore uses a
     distributed architecture to automatically manage scaling. Cloud
     Datastore uses a mix of indexes and query constraints so your
     queries scale with the size of your result set, not the size of your
     data set.
--   Flexible storage and querying of data. Cloud Datastore maps
+-   Flexible storage and querying of data. Cloud Firetore maps
     naturally to object-oriented and scripting languages, and is exposed
     to applications through multiple clients. It also provides a
     SQL-like query language.
--   Balance of strong and eventual consistency. Cloud Datastore ensures
+-   Balance of strong and eventual consistency. Cloud Firetore ensures
     that entity lookups by key and ancestor queries always receive
     strongly consistent data. All other queries are eventually
     consistent. The consistency models allow your application to deliver
     a great user experience while handling large amounts of data and
     users.
--   Encryption at rest. Cloud Datastore automatically encrypts all data
+-   Encryption at rest. Cloud Firetore automatically encrypts all data
     before it is written to disk and automatically decrypts the data
     when read by an authorized user. For more information, see
     Server-Side Encryption.
 -   Fully managed with no planned downtime. Google handles the
-    administration of the Cloud Datastore service so you can focus on
+    administration of the Cloud Firetore service so you can focus on
     your application. Your application can still use Cloud Datastore
     when the service receives a planned upgrade.
+-   Realtime update: `on_snapshot` function listens for updates and callbacks can act on updates
 
 ## [Cloud Memorystore](https://cloud.google.com/memorystore/) (redis)
 
@@ -380,19 +387,6 @@ Eventually consistent. Not for relational data but storing objects.
 Ideal for low latency data that must be shared between workers. Failover
 is separate zone. Application must be tollerant of failed writes.
 
-## [Cloud Firestore (Datastore like)](https://cloud.google.com/firestore/)
-
-NoSQL database built for global apps. Compatible with Datastore API.
-Automatic multi region replication. ACID transactions. Query engine.
-Integrated with firebase services.
-
-## [Cloud firebase Realtime Database](https://firebase.google.com/products/realtime-database/)
-
-Real time syncing of JSON data. Can collaborate across devices with
-ease.
-
-Could this be used for jupyter notebooks? Probably not due to
-restrictions… cant see exactly what text has changed.
 
 # Networking
 
