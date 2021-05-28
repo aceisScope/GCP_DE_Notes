@@ -121,8 +121,15 @@ Only available for certain images.
 
 ## [Cloud Storage](https://cloud.google.com/storage/) (Object)
 
-Object storage. Unified S3 object storage api. Great for storage of
+**Unstructed** object storage. Unified S3 object storage api. Great for storage of
 blobs and large files (great bandwidth) not necessarily lowest latency.
+
+Storage Classes:
+
+-   Standard
+-   Nearline: 30-days minimum
+-   Coldline: 90-days minimum
+-   Archive: 365-days minimum
 
 Single api for accessing:
 
@@ -142,12 +149,16 @@ Object Lifecycle Mangement
 -   delete files after older than X days
 -   move files to coldline storage after X days
 
-Requester Pays: you can enable requester of resources for pay for
-transfer.
+Advanced Features:
+
+-   Requester Pays: you can enable requester of resources for pay for transfer.
+-   Parallel uploads of composite objects
+-   Integrity checking: MD5 hash
+-   Transcoding: gzip
 
 You can label a bucket.
 
-You can version all objects.
+You can version all objects. Overwrites are atomic.
 
 Encrypt objects with your own encryption keys (locally)
 
@@ -158,11 +169,12 @@ Controlling Access:
 -   `AllUsers:R` makes an object world readable
 -   `allUsers:objectViewer` makes a bucker or group of objects world
     readable
--   Signed URLs give time-limited read or write access to a specific
-    Cloud Storage resource
--   programmatically create signed URLs
+-   IAM for bulk access to buckets
+-   ACL for granular access to buckets
+-   Signed policy document for buckets
+-   Signed URLs give time-limited read or write access to a specific Cloud Storage resource
 
-Redundancy is
+
 
 ## [Persistent Disk](https://cloud.google.com/persistent-disk/) (Block)
 
@@ -214,7 +226,7 @@ Sheets, and Slides.
 
 Covers sending files to google.
 
-Data Transfer (Online Transfer)  
+## Data Transfer (Online Transfer)  
 Use your network to move data to Google Cloud storage
 
 -   [draga and
@@ -222,7 +234,7 @@ Use your network to move data to Google Cloud storage
 -   gsutil
 -   json api inject tool (python api for example)
 
-Cloud Storage Transfer Service  
+## Cloud Storage Transfer Service  
 use for cloud transfters like AWS -&gt; GCP
 
 -   Storage Transfer Service allows you to quickly import online data
@@ -237,7 +249,7 @@ use for cloud transfters like AWS -&gt; GCP
     -   schedule periodic synchronization from source to data (with
         filters)
 
-Transfer Appliance  
+## Transfer Appliance  
 install storage locally move data and send to google
 
 -   two rackable applicances capable of 100 TB + 100 TB
@@ -327,7 +339,7 @@ Relational Semantics requiring explicit key.
 
 Highly available transactions. Globally replicated.
 
-## [Cloud Datastore](https://cloud.google.com/datastore/) (NoSQL)
+## [Cloud Firetore](https://cloud.google.com/firestore/) (NoSQL)
 
 SQL like query language. ACID transactions. Fully managed.
 
