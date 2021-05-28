@@ -277,23 +277,18 @@ Fully manged MYSQL and Postgresql service. Susstained usage discount.
 Data replication between zones in a region.
 
 -   Fully managed MySQL Community Edition databases in the cloud.
--   Second Generation instances support MySQL 5.6 or 5.7, and provide up
-    to 416 GB of RAM and 10 TB data storage, with the option to
-    automatically increase the storage size as needed.
--   First Generation instances support MySQL 5.5 or 5.6, and provide up
-    to 16 GB of RAM and 500 GB data storage.
--   Create and manage instances in the Google Cloud Platform Console.
--   Instances available in US, EU, or Asia.
--   Customer data encrypted on Google’s internal networks and in
-    database tables, temporary files, and backups.
--   Support for secure external connections with the Cloud SQL Proxy or
-    with the SSL/TLS protocol.
--   Support for private IPbeta (private services access).
--   Data replication between multiple zones with automatic failover.
--   Import and export databases using mysqldump, or import and export
-    CSV files.
--   Support for MySQL wire protocol and standard MySQL connectors.
--   Automated and on-demand backups, and point-in-time recovery.
+-   MySQL 5.6 or 5.7, PostgreSQL 9.6 or 11 and SQL Server in beta
+-   Customer data encrypted on Google’s internal networks and indatabase tables, temporary files, and backups.
+-   Support for secure external connections with the Cloud SQL Proxy or with the SSL/TLS protocol, or private IPbeta (private services access).
+-   MySQL: 
+    -   HA: Data replication between multiple zones with automatic failover via failover replicas.
+    -   Import and export databases using mysqldump, CSV files or external replica promotion (requires binary log retention and GTID consistency).
+    -   Support for MySQL wire protocol and standard MySQL connectors.
+    -   Automated and on-demand backups, and point-in-time recovery (requires **binary logging**).
+-   Postgres:
+    -  HA: primary instance and standby instance in multiple zones sharing the same persistent disk
+    -  Automated backups, but doesn't support point-in-time recovery
+    -  Extensions   
 -   Instance cloning.
 -   Integration with Stackdriver logging and monitoring.
 -   ISO/IEC 27001 compliant.
