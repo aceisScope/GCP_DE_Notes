@@ -699,38 +699,52 @@ Gcloud console commands
 ## [Cloud Pub/Sub](https://cloud.google.com/pubsub/)
 
 simple reliable, scalable foundation for analytics and event driven
-computing systems.
+computing systems. serverless and fully-managed.
 
 Can trigger events such as Cloud Dataflow.
 
-Features:
+### Features:
 
--   at least once delivery
+-   **at least once delivery**: each message is delivered at least once for every subscription. Undelivered message will be deleted after the message retention duration, default is 7 days (10 mins - 7 days).
 -   exactly once processing
 -   no provisioning
 -   integration with cloud storage, gmail, cloud functions etc.
 -   open apis and client libraries in many languages
 -   globally trigger events
 -   pub/sub is hipaa compliant.
+-   Seeking: to alter the state of acknowledgement of messages in bulk. For example, you can seek to a timestamp in the past, and all messages received after that time will be marked as unacknowledged
+-   Snapshot: are used in seeking as an alternative to a timestamp. You need to create a snapshot at a point in time, and that snapshot will retain all messages that were unacknowledged at the point of the snapshot's creation,
 
-Details:
+### Details:
 
 message  
-the data that moves through the serivce
+the data that moves through the serivce. message must be acknowledged on receiving. PULL is the default method. If PUSH is used, must use HTTPS. 
 
 topic  
 a named entity that represetnds a feed of messages
 
 subscription  
-an entity interested in receiving mesages ona particular topic
+an entity interested in receiving mesages on a particular topic. Expires after 31 days of inactivity. 
 
 publisher  
-create messages and sends (published) them to a specific topic
+create messages and sends (published) them to a specific topic. A messae is base64 encoded, 10MB or less.
 
 subscriber (consumer)  
-recieves messages on a specified subscription
+recieves messages on a specified subscription. 
 
-Performance(scalability):
+### Monitoring
+
+- `pubsub.googleapis.com/topic/byte_cost`: Total utilization in bytes
+- `pubsub.googleapis.com/subscription/byte_cost`: Subscription utilization in bytes
+- `subscription/num_undelivered_messages`: Undelivered messages belonging to a subscription
+- `subscription/oldest_unacked_message_age`: The oldest message yet to be retrieved by a subscription
+- `subscription/num_outstanding_messages`: Messagings pending delivery to a push subscription
+
+### Access Control
+
+- Use service accounts for authorization
+- Grant per-topic or per-subscription permissions
+- Grant limited access to publish or consume messages
 
 ## [Cloud Composer](https://cloud.google.com/composer/)
 
