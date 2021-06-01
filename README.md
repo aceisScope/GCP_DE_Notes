@@ -658,27 +658,40 @@ Saving money on costs:
 
 ## [Cloud Dataflow](https://cloud.google.com/dataflow/)
 
-Fully managed service for transforming and reacting to data.
+Fully managed service for transforming and reacting to data, based on Apache Beam. Cloud Dataflow automates provisioning and management of processing resources to minimize latency and maximize utilization; no more spinning up instances by hand or reserving them.
 
-automated resource managerment  
-Cloud Dataflow automates provisioning and management of processing
-resources to minimize latency and maximize utilization; no more spinning
-up instances by hand or reserving them.
+Driver program defines pipeline, is submitted to a Runner for processing. 
 
-dynamic work rebalancing  
-automated and optimized work partitioning dynamic lagging work.
+### Concepts
+-   PCollection: represents a potentially distributed, multi-element dataset that acts as the pipeline's data. It's immutable.
+-   Transform:  represents a processing operation that transforms data. A transform takes one or more PCollections as input, performs an operation that you specify on each element in that collection, and produces one or more PCollections as output. E.g. ParDo, GroupBYKey, CoGroupByKey, Combine, Flatten, Partition.
+-   ParDo: the core parallel processing operation in the Apache Beam SDKs, invoking a user-specified function on each of the elements of the input PCollection. ParDo collects the zero or more output elements into an output PCollection. The ParDo transform processes elements independently and possibly in parallel.
+-   Aggregation: Aggregation is the process of computing some value from multiple input elements. The primary computational pattern for aggregation in Apache Beam is to group all elements with a common key and window. Then, it combines each group of elements using an associative and commutative operation.
+-   Event Time: data event occurs, determined by the timestamp on the data element itself. This *contrasts with the time the actual data element gets processed at any stage in the pipeline*.
+-   Windowing: enables grouping operations over unbounded collections by dividing the collection into windows of finite collections according to the timestamps of the individual elements
+    -   Fixed time window: represents a constant, non-overlapping time interval
+    -   Sliding: can overlap. an element can belong to multiple windows. useful for taking running averages of data.
+    -   Per Session: created in a stream when there is an interruption in the flow of the events which exceeds a certain time period. applied on a per-key basis. useful for irregular distributed data.
+    -   Single global
+-   Watermarks: is the system's notion of when all data in a certain window can be expected to have arrived in the pipeline
+-   Triggers: determine when to emit aggregated results as data arrives. For bounded data, results are emitted after all of the input has been processed. For unbounded data, results are emitted when the watermark passes the end of the window. E.g. event time trigger, processing time trigger, data-driven trigger, composite trigger
 
--   reliable & consistent exactly-once processing
--   horizontal auto scaling
--   apache beam sdk
+### Access control
 
-Realtime processing of incoming data.
+-  Cloud Dataflow service account: automatically created when project is created. used by dataflow service itself. manipulated job resources. assumes **cloud dataflow agent role**. r/w access to project resources.
+-  Controller service account: used by the worker (compute engine) instances created by the dataflow service. use for metadata operations. it's possible to create user-managed controller service account.
+-  Security mechanisms: Submission of the pipeline, eveluation of the pipeline
 
--   cleaning up data
--   triggering events
--   writing data to destinations SQL, bigquery, etc.
+### Using Cloud Dataflow
 
-Regional Endpoints
+-   Regional Endpoints: A Dataflow regional endpoint stores and handles metadata about your Dataflow job and deploys and controls your Dataflow workers.
+-   Customer-managed encryption key: encrypt dataflow data at rest
+-   Flexible Resource sharing (FlexRS) for batched pipleline to reduce cost
+    -   Advanced scheduling
+    -   Cloud Dataflow Shuffle service
+    -   Preemptible VMs
+-   Migrating MapReduce to dataflow
+-   With Cloud Pub/Sub Seek to replay
 
 ## [Cloud Dataproc](https://cloud.google.com/dataproc/)
 
@@ -713,7 +726,7 @@ Can trigger events such as Cloud Dataflow.
 -   globally trigger events
 -   pub/sub is hipaa compliant.
 -   Seeking: to alter the state of acknowledgement of messages in bulk. For example, you can seek to a timestamp in the past, and all messages received after that time will be marked as unacknowledged
--   Snapshot: are used in seeking as an alternative to a timestamp. You need to create a snapshot at a point in time, and that snapshot will retain all messages that were unacknowledged at the point of the snapshot's creation,
+-   Snapshot: are used in seeking as an alternative to a timestamp. You need to create a snapshot at a point in time, and that snapshot will retain all messages that were unacknowledged at the point of the snapshot's creation, accessing telemetry or metrics
 
 ### Details:
 
