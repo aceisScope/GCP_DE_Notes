@@ -297,32 +297,62 @@ Some statements and features are not supported.
 
 ## [Cloud BigTable](https://cloud.google.com/bigtable/) (NoSQL similar to Cassandra HBASE)
 
-High throughput and consistent. Sub 10 ms latency. Scale to billions of
-rows and thousands of columns. can store TB and PB of data. Each row
-consists of a key. Large amounts of single keyed data with low latency.
-High read and write throughput. Apache HBase API.
+Managed wide-column NoSQL database. High throughput. Low latency. Scalibility. High availability. Apache HBase API.
 
-Replication among zones. Key value map.
+### Data Model
+-   Row key: the only index
+-   Column families: logical combinations of columns
+-   Column qualifier: the name of the column
+-   3-D table: every cell is written with a timestamp. new values can be added without overwriting the old value. a value of a cell is an array of bytes.
+-   Tablets: Block of continous rows are sharded into *tablets*. Within a tablet, rows are sorted by row key.
+-   Sparse table
+-   A cell is max 10Mb, a row is max 100 Mb.
+-   Timestamp and garbage collection: each cell has multiple versions. older versions can be garbage collected according to expiry policy based on age or numbers of versions.
 
--   key to sort among rows
--   column families for combinations of columns
+### Schema Design
 
-Performance
+- Query: uses a row key or a row key prefix
+- Designing row keys
+    -   reverse domain names (domain names should be written in reverse) com.google for example.
+    -   string identifiers (do not hash)
+    -   timestamp in row key (only as part of a bigger row key design)
+    -   row keys can store multiple things - keep in mind that keys are sorted (lexicographically)
+- Designing for performance:
+    -   Lexicographic sorting
+    -   Store related entities in adjecent rows
+    -   Distribute reads and writes evenly
+    -   Balanced access patterns enable linear scaling of performance
+- Designing for time series data:
+    - Use tall and narrow tables  
+    - Use rows instead of versioned cells
+    - Logically separate tables
+- Avoid hotspots:
+    - Field promotion: taking data that is already known and moving it to the row key.
+    - Salting
+    - Key visualizer
 
--   row keys should be evenly spread among nodes
+### Architecture
 
-How to choose a row key:
+-   Instance: a logical container for bigtable cluster that shares a same configuration. defined by instance type, storage type and app profiles. Up to 4 clusters. Maximum 1000 tables.
+    -   Instance types:
+        - Development: single node cluster. no replication or SLA. can be upgraded to production.
+        - Production: 1+ clusters, 3+ nodes per cluster.
+    -   Storage types: 
+        -   SSD
+        -   HDD: storing at least 10TB of infrequently-accessed data with no latency sensitivity
+    -   Application profiles: Custome application-specific settings for handling income connections. Single or multi-cluster routing. **Single-row transactions (atomic update to single row) support requies single cluster routing for strong consistency**.    
+-   Cluster: inside instance, contains nodes. To achieve multi-zone redundancy is to run additional clusters in different zones in the same instance. Up to 30 clusters per project.
+-   Data storage: tablets in Coogle Colossus
 
--   reverse domain names (domain names should be written in reverse)
-    com.google for example.
--   string identifiers (do not hash)
--   timestamp in row key
--   row keys can store multiple things - keep in mind that keys are
-    sorted (lexicographically)
+### Monitoring
 
-Cloud bigtable
+- CPU overload: for single-cluster instance, average CPU load should be under 70%, hottest node not going over 90%. For two clusters, 35% and 45% respectively.
+- Storage utilization: below 70% per node
 
--   10 MB per cell and 100 MB per row max
+### Performance
+
+- Replications improves read throughput but doesn't affect write throughput
+- Use batch writes for bulk data with rows that are close together lexicographically
 
 ## [Cloud Spanner](https://cloud.google.com/spanner/) (SQL)
 
