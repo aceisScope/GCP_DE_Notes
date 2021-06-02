@@ -650,23 +650,18 @@ minutes intervals.
 
 ## [Big Query](https://cloud.google.com/bigquery/)
 
-Free up to 1 TB of data analyzed each month and 10 GB stored.
+Free up to 1 TB of data analyzed each month and 10 GB stored. High availability, support SQL and federated data.
 
+### Features
 -   Data Warehouses
 -   Business Intelegence
--   Big Query
 -   Big Query ML
     -   Adding labels in SQL query and training model in SQL
-    -   linear regresion, classification logistic regressin, roc curve,
-        model weight inspection.
+    -   linear regresion, classification logistic regressin, k-means clustering, roc curve, model weight inspection.
     -   feature distribution analysis
-    -   integrations with Data Studio, Looker, and Taeblo
+    -   integrations with Data Studio, Looker, and Tableu
 
-Accessible through REST api and client libraries, including command line
-tool.
-
-Data is stored in Capacitor columnar data format and offers the standard
-database conceps of tables, paritions, columns, and rows.
+### Data Ingestion
 
 Data in Big Query Can be loaded in:
 
@@ -679,12 +674,53 @@ Data in Big Query Can be loaded in:
     -   google big query IO transformation
 -   streaming
 
-Saving money on costs:
+### Usage
+
+- Jobs: Load, export, query (priorities: interactive and batch), copy
+- Table storage: data is stored in Capacitor columnar data format and offers the standard database conceps of tables, paritions, columns, and rows.
+    - Capacitor columnar: Proprietary columnar data storage that supports semi-structured data (nested and repeated fields). Each value stored together with a repetition level and a definition level
+- Denormalisation: nested and repeated columns -> **RECORD (STRUCT)** data type
+- View: a virtual table defined by an SQL query. each time a view is accessed the query is executed.
+    - Control access to data
+    - Reduce query complexity
+    - Constructing logical tables
+    - Ability to create authorised views (1000 per dataset) to share data across projects
+- Partitioning: can reduce cost and improve query performance
+    - Ingestion time based partitioning: partitioned by load or arrival date, **_PARTITIONTIME**
+    - partitioned tables: partition based on TIMESTAMP or DATE column
+- Clustering: data with a particular cluster key is stored together. to further reduce scan of unnecessary data.
+- Slots: unit of computational capacity required to execute SQL query
+
+### Best Practices
+
+#### Controlling Cost
 
 -   avoid `SELECT *`
--   use summary routines to only show a few rows
+-   use preview options to sample data
 -   use `--dry-run` command it will give you price of query
--   no charge for regular loading of data. Streaming does cost money.
+-   user `LIMIT` doesn't affect cost
+-   partition by date
+-   materialize query results in stages
+-   use streaming inserts with caution
+
+#### Performance
+
+- Input data and data sources
+    - Prune partitioned queries
+    - Denormalise data whenever possible
+    - use external data sources apporiately
+    - avoid excessive wildcard tables
+- Query computation
+    - avoid repeated transforming data via SQL queries
+    - avoid JavaScripted user-defined functions
+    - order query operations to maximize performance
+    - optimize JOIN patterns
+- SQL anti-patterns
+
+### Security
+
+- Cloud Data Loss Prevention (DLP) to protect sensitive data
+- Cloud Key Management Service
 
 ## [Cloud Dataflow](https://cloud.google.com/dataflow/)
 
