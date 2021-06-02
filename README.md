@@ -695,11 +695,17 @@ Driver program defines pipeline, is submitted to a Runner for processing.
 
 ## [Cloud Dataproc](https://cloud.google.com/dataproc/)
 
-Managed apache hadoop and apache spark instances.
+Managed apache hadoop and apache spark instances. ETL pipeline (Extract Transform Load). Nodes are preconfigured VMs. One master and multiple worker nodes (except single-node cluster).
 
-Scalable and allow for preemptible instances.
+Support native connectors: Cloud Storage, BigQuery and Cloud BigTable
 
-ETL pipeline (Extract Transform Load)
+Autoscaling is not recommended with/for HDFS, YARN Node Labels, Spark Structured Streaming or Idle Clusters
+
+### Cluster Types
+- Single-node: master and workers are on the same VM
+- Standard: A master VM (YARN resource manager and HDFS name node) and worker VMs (YARN node manager and HDFS data node). can also add preemptible workers, but these workers don't store HDFS data.
+- High-availability: Three master VMs and multiple workder VMs (autoscaling doesn't work with HA type)
+
 
 ## [Cloud Datalab](https://cloud.google.com/datalab/)
 
