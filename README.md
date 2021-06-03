@@ -833,42 +833,20 @@ recieves messages on a specified subscription.
 
 ## [Cloud Composer](https://cloud.google.com/composer/)
 
-Managed Apache airflow. (differences)
+Task orchestration system. Managed Apache airflow. Every workflow is defined as a DAG. 
 
--   client tooling and integrated experience with google cloud
--   security IAM and audit logging with google cloud
--   stackdriver intergration
--   streamlined airflow runtime and environment configuration such as
-    plugin support
--   simplified DAG (workflow) maangement
--   python pypi package management
+### Architecture
 
-Core support for:
+- A Cloud Composer environment is a wrapper around Apache Airflow. It includes:
+    - GKE Cluster: The Airflow scheduler, workers, and Redis Queue run as GKE workloads on a single cluster, and are responsible for processing and executing DAGs. 
+    - Web server: The web server runs the Apache Airflow web interface
+    - Cloud Storage bucket: Cloud Composer associates a Cloud Storage bucket with the environment
+- Cloud Composer environments can be created in three configurations: Public IP, Private IP, and Private IP with Domain restricted sharing (DRS)
+    - In a Public IP configuration, environment resources are distributed between the customer and tenant projects. The tenant project hosts a Cloud SQL instance to run the Airflow database, and a Google App Engine Flex VM to run the Airflow web server. The Airflow scheduler, workers, and webserver connect to the Airflow database using Cloud SQL proxy processes
+    - Environment variables can be passed by the environment to the scheduler and workers etc.
+- An Airflow DAG is defined in a Python file and is composed of the following components: A DAG definition, operators, and operator relationships.
+- Airflow Connections: default to BigQuery, Datastore, Cloud Storage, Generic
 
--   dataflow
--   bigquery
--   storage operators
--   spanner
--   sql
--   support in many other clouds
--   workflow orchestration solution
-
-DAGS every workflow is defined as a DAG. Series of tasks to be done.
-
-Task a set task within a workflow that you want to do.
-
-Operators.
-
-Builtin support for services outside GCP: http, sftp, bash , python,
-AWS, Azure, Databricks, JIRA, Qubole, Slack, Hive, Mongo, MySQL, Oracle,
-Vertica.
-
-Kubernetes PodOperator.
-
-Integrates with `gcloud composer`. Cloud SQL is used to store the
-Airflow metadata. App Engine for serving the web service. Cloud storage
-is used for storing python plugins and dags etc. All running inside of
-GKE. Stackdriver is used for collecting all logs.
 
 ## [Genomics](https://cloud.google.com/genomics/)
 
