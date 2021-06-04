@@ -953,6 +953,7 @@ Machine learning to solve the job search
 
 ## [Dialog Flow](https://cloud.google.com/dialogflow-enterprise/)
 
+- Intents: training phrases -> intents classification -> extracted parameters
 -   conversational interfaces
     -   chatbots for example
     -   text to speech
@@ -965,15 +966,14 @@ Machine learning to solve the job search
 Google Cloud Natural Language reveals the structure and meaning of text
 both through powerful pretrained machine learning models in an easy to
 use REST API and through custom models that are easy to build with
-AutoML Natural LanguageBeta. Learn more about Cloud AutoML.
+AutoML Natural Language. 
 
-You can use Cloud Natural Language to extract information about people,
-places, events, and much more mentioned in text documents, news
-articles, or blog posts. You can use it to understand sentiment about
-your product on social media or parse intent from customer conversations
-happening in a call center or a messaging app. You can analyze text
-uploaded in your request or integrate with your document storage on
-Google Cloud Storage.
+- Sentiment Analysis
+    - Score: indicates the overall emotionality, between -1.0 (negative) to 1.0 (positive)
+    - Magnitutde: how much emotional content. from 0 to infinity. not normalised.
+- Entity Analysis: inspects the given text for known entities (proper nouns such as public figures, landmarks, etc.), and returns information about those entities, including metadata containing a knowledge graph MID and a wikipedia url if identified, salience (importance), etc
+- Entity sentiment analysis: combines Entity and Sentiment Analysis. tries to determine the sentiment expressed towards each of the identified entities.
+- Content classification
 
 ## [Cloud Speech to Text](https://cloud.google.com/speech-to-text/)
 
@@ -999,51 +999,39 @@ Cloud Translation offers both an API that uses pretrained models and the
 ability to build custom models specific to your needs, using AutoML
 Translation.
 
-The Translation API provides a simple programmatic interface for
-translating an arbitrary string into any supported language using
-state-of-the-art Neural Machine Translation. It is highly responsive, so
-websites and applications can integrate with Translation API for fast,
-dynamic translation of source text from the source language to a target
-language (such as French to English). Language detection is also
-available in cases where the source language is unknown. The underlying
-technology is updated constantly to include improvements from Google
-research teams, which results in better translations and new languages
-and language pairs.
 
 ## [Cloud Vision](https://cloud.google.com/vision/)
 
 Cloud Vision offers both pretrained models via an API and the ability to
 build custom models using AutoML Vision to provide flexibility depending
 on your use case.
+- OCR: `TEXT_DETECTION` and `DOCUMENT_TEXT_DETECTION`
+- Cropping hints
+- Face detection: faces, emotional states, hatware etc
+- Image property detection
+- Label detection: objects, locations, etc
+- Landmark detection
+- Logo detection
+- Explicit content detection
+- Web entity and page detection
 
-Cloud Vision API enables developers to understand the content of an
-image by encapsulating powerful machine learning models in an
-easy-to-use REST API. It quickly classifies images into thousands of
-categories (such as, “sailboat”), detects individual objects and faces
-within images, and reads printed words contained within images. You can
-build metadata on your image catalog, moderate offensive content, or
-enable new marketing scenarios through image sentiment analysis.
+Google knowledge graph search API: 
+- Getting a ranked list of the most notable entities that match certain criteria.
+- Predictively completing entities in a search box.
+- Annotating/organizing content using the Knowledge Graph entities.
 
-## [Cloud Inference API](https://cloud.google.com/inference/docs/)
+## [Cloud Video AI](https://cloud.google.com/video-intelligence)
 
-Quickly run large-scale correlations over typed time-series datasets.
+Time duration based powerful content discovery with videos.
 
-Calculate correlations between data that you are getting from sensors
-etc. For example using big table.
-
-## [Firebase Predictions](https://firebase.google.com/products/predictions/)
-
-Group users based on predictive behavior.
-
-## [Cloud Deep Learning VM Image](https://cloud.google.com/deep-learning-vm/)
-
-Preconfigured images for deep learning application.
-
-Have all the interesting frameworks preinstalled.
+- Detect labels
+- Shot change detection
+- Detect explicit content
+- Transscribe speech
+- Track objects
+- Detect text
 
 # Security
-
-Learn if necessary.
 
 ## Cloud IAM
 
