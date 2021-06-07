@@ -913,19 +913,18 @@ Prebuilt solutions. Very much a pre alpha product.
 
 ## [Cloud AutoML](https://cloud.google.com/automl/)
 
-Makes it approachable even if you have minimal experience.
+Limited experience to train and make predictions. Full rest api andscalably train for labeling features.
 
-Products:
-
--   natrual language
--   translation
--   vision
-
-Use case is that you would like to specially train your model to detect
-features that are more specific than the ones google provides.
-
-Limited experience to train and make predictions. Full rest api and
-scalably train for labeling features.
+-   Language
+    -   Natural language classification : minimum of 10 documents per label, and ideally 100 times more documents for the most common label than for the least common label. The maximum number of documents for training data is 1,000,000.
+    -   Translation
+-   Vision: Train models from labeled images
+    -   Classification
+    -   Vision Edge: export custom trained model, ML Kit in mobile 
+    -   Image detection: _Object localization_ - Detects multiple objects in an image and provides information about the object and where the object was found in the image.
+-   Structured Data: Tables
+    -   Online predictions
+    -   Batch predictions:  make an asynchronous request for a batch of predictions using the batchPredict method
 
 ## [Cloud TPU](https://cloud.google.com/tpu/)
 
