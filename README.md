@@ -1,121 +1,3 @@
-# Compute
-
-## [Compute Engine](https://cloud.google.com/compute/)
-
-Example
-
-gcloud compute instances create my-vm –custom-cpu 4 –custom-memory 5
-
-gcloud compute instances create my-vm –zone us-central1-b –preemptible
-
-Features:
-
--   predefined machine types up to 160 vCPUs and 3.75 TB of memory
--   custom machine types
--   persistent disk (64 TB in size)
-    -   ssd or hdd
-    -   can take snapshots and create new persistent disks
--   local ssd for scratch storage (3TB in size)
--   debian, centos, coreos, suse, ubuntu, etc images including bring
-    your own
--   batch processing (preemptible vms)
--   encryption
--   per second billing
--   committed use discounts
-
-Premptible instances can run a custom shutdown script. Instance is given
-30 seconds.
-
-## [App Engine](https://cloud.google.com/appengine/)
-
-Platform as a Service (PaaS).
-
-Features:
-
--   Languages: javascript, ruby, go, .net, java, python, and php
--   fully managed
--   monitoring through stackdriver
--   easy app versioning
--   traffic splitting A/B tests and incremental features
--   ssl/tls managed
--   integrated with GCP services
-
-## [Kubernetes Engine](https://cloud.google.com/kubernetes-engine/)
-
-Hosted kubernetes engine. Super simple to get started a Kubernetes
-cluster.
-
-Features:
-
--   integrated with Identify & Access management
--   hybrid networking (IP Address for clusters to coexist with private
-    ips)
--   HIPAA and PCI DSC 3.1 compliant
--   integrated with stackdriver logging and monitoring
--   autoscale
--   auto upgrade (upgrade nodes)
--   auto repair (repair process for nodes)
--   resource limits (kubernetes specify resource limits of each
-    container)
--   stateful applications (storage backed)
--   supports docker image formats
--   fully manager with SRE from google
--   google managed OS
--   private containers (integrates with Google Container Registry)
--   builds with (Google Cloud Build)
--   can be easily transfered to on premise
--   gpu support (easy to run machine learning applications)
-
-## [GKE In-Prem](https://cloud.google.com/gke-on-prem/)
-
-Reliable, efficient, and secured way to run kubernetes clusters
-anywhere. Integration using IAM. Similar features to GKE.
-
-## [Cloud Functions](https://cloud.google.com/functions/)
-
-Automatically scales, highly available and fault tolerant. No servers to
-provision.
-
--   file storage events
--   events (pub/sub)
--   http
--   Firebase, and Google Assistant
--   stackdriver logging
-
-Languages: python 3.7 and node.
-
-Access and IAM. VPC access to cloud functions. Can not connect vpc to
-cloud functions. IAM controls on the invoke of the function. `--member`
-allow you to control which user can invoke the function. IAM check to
-make sure that appropriate identity.
-
-Serverless containers are coming soon.
-
-## [Knative](https://cloud.google.com/knative/)
-
-Kubernetes + Serverless addon for GKE.
-
--   serving: event driven, scale to zero, request driven compute model
--   build: cloud natie source to container orchestration
--   events: universal subscriptin, delivery, and management of events
--   add ons: enable knative addons
-
-## [Sheilded VMs](https://cloud.google.com/shielded-vm/)
-
-Shielded VMs protect against:
-
--   verify VM identity
--   quickly protect VMs against advanced threats: root kit, etc.
--   protect secrests
-
-Only available for certain images.
-
-## [Containers Security](https://cloud.google.com/containers/security/)
-
--   patch applied regular on frequent builds and image security reviews
--   containers have less code and a smaller attack surface
--   isolate processes working with recourses (separate storage from
-    networking)
 
 # Storage
 
@@ -257,7 +139,7 @@ install storage locally move data and send to google
 -   greater than 20 TB it is worth it.
 -   capable of high upload speeds (&gt; 1GB per second)
 
-## Big Query Data Transfer Service
+## Data Transfer Service
 -   The BigQuery Data Transfer Service automates data movement from
     Software as a Service (SaaS) applications such as Google Ads and
     Google Ad Manager on a scheduled, managed basis. Your analytics
@@ -338,8 +220,9 @@ Managed wide-column NoSQL database. High throughput. Low latency. Scalibility. H
         - Development: single node cluster. no replication or SLA. can be upgraded to production.
         - Production: 1+ clusters, 3+ nodes per cluster.
     -   Storage types: 
-        -   SSD
-        -   HDD: storing at least 10TB of infrequently-accessed data with no latency sensitivity
+        -   SSD: reads up to up to 10,000 rps.
+        -   HDD: up to 500 rps. storing at least 10TB of infrequently-accessed data with no latency sensitivity
+        -   one can't change the disk type on an existing Bigtable instance
     -   Application profiles: Custome application-specific settings for handling income connections. Single or multi-cluster routing. **Single-row transactions (atomic update to single row) support requies single cluster routing for strong consistency**.    
 -   Cluster: inside instance, contains nodes. To achieve multi-zone redundancy is to run additional clusters in different zones in the same instance. Up to 30 clusters per project.
 -   Data storage: tablets in Coogle Colossus
@@ -420,235 +303,9 @@ is separate zone. Application must be tollerant of failed writes.
 User cases include session cache, message queue and pub/sub.
 
 
-# Networking
-
-## Virtual Private Cloud (VPC)
-
-A private space within google cloud platform. A single VPC can span
-multiple regions without communicating accress public Internet. Can
-allow for single connection points between VPC and on-premise resources.
-VPC can be applied at the organization level outside of projects. No
-shutdown or downtime when adding IP scape and subnets.
-
-Get private access to google services such as storage big data, etc.
-without having to give a public ip.
-
-VPC can have:
-
--   firewall rules
--   routes (how to send traffic)
--   forwarding rules
--   ip addresses
-
-Ways to connect:
-
--   vpn (using ipsec)
--   interconnect
-
-## [Google Cloud Load Balancing](https://cloud.google.com/load-balancing/)
-
-Cloud load balances can be divided up as follows:
-
--   global vs. regional load balancing
--   external vs internal
--   traffic type
-
-Global:
-
--   http(s) load balancing
--   ssl proxy
--   tcp proxy
-
-Global has a single anycast address, health checks, cookie-based
-affinity, autoscaling, and monitoing.
-
-Regional:
-
--   internal TCP/UDP load balancing
--   network tcp/udp load balancing
-
-Single IP address per region.
-
-## [Google Cloud Armor](https://cloud.google.com/armor/)
-
-Protect against DDoS attacks. Permit deny/allow based on IP.
-
-## [Cloud CDN](https://cloud.google.com/cdn/)
-
-Low-latency, low-cost content delivery using Google global network.
-Recently ranked the fastest cdn. 90 cache sites. Always close to users.
-Cloud CDN comes with SSL/TLS.
-
--   anycast (single IP address)
--   http/2 support these push abilities
--   https
--   invalidation :: take down cached content in minutes
--   logging with stackdriver
--   serve content from compute engine and cloud storage buckets. Can mix
-    and match.
-
-## [Cloud Interconnect](https://cloud.google.com/interconnect/)
-
-Connect directly to google.
-
--   interconnect (Direct access with SLA)
-    -   dedicated interconnect
-    -   partner interconnect
-    -   ipsec VPN
--   peering (google's public ips only) no physical connection to google
-    -   direct peering
-    -   carries peering
-
-## [Cloud DNS](https://cloud.google.com/dns/)
-
-Scalable, reliable, and amanaged DNS syetm. Guarantees 100%
-availability. Can create millions of DNS records. Managed through API.
-
-## Network Service Tiers (no studied)
-
-## Network Telemetry
-
-Allows for monitoring on network traffic patterns.
-
-# Management Tools
-
--   [Stackdriver](https://cloud.google.com/stackdriver/)
-    -   monitoring
-    -   logging
-    -   error reporting with triggers
-    -   trace
--   Cloud Console :: web interface for working with google cloud
-    recources
--   Cloud shell :: command line management for web browser
--   Cloud mobile app :: available on android and OSX
--   Seperate billing accounts for managing paying for projects
--   Cloud Deployment Manager for managing google cloud infrastructure
--   Cloud apis for all GCP services
-
-# API Platform and Ecosystems
-
-## Apigee API Platform
-
-Many many features around apis. Features: design, secure, deploy,
-monitor, and scale apis. Enforce api policies, quota management,
-trasformation, autorization , and access control.
-
--   create api proxies from Open API specifications and deploy in the
-    cloud.
--   protect apis. oauth 2.0, saml, tls, and protection from traffic
-    spikes
-    -   dynamic routing, caching, and rate limiting policies
--   publish apis to a developer portar for developers to be able to
-    explore
--   measure performance and usage integrating with stackdriver.
-
-Free trial, then $500 quickstart and larger ones later. Monetization.
-
-Healthcare, Banking, Sense (protect from attacks).
-
-## API Monetization
-
-Tools for creating billing reports for users. Flexible report models
-etc. This is through apigee
-
-$300/month to start. Engagement, operational metrics, business metrics.
-
-## [Cloud Endpoints](https://cloud.google.com/endpoints/)
-
-Google Cloud Endpoints allows a shared backend. Cloud endpoints
-annotations. Will generate client libraries for the different languages.
-
-Nginx based proxy. Open API specification and provides insight with
-stackdriver, monitoring, trace, and logging.
-
-Control who has acess to your API and validate every call with JSON web
-tockens and google api keys. Integration with Firebase Authentication
-and Auth0.
-
-Less than 1ms per call.
-
-Generate API keys in GCP console and validate on every API call.
-
-## Developer Portal
-
-Have dashboards and places for developers to easily test the API.
-
-# Developer Tools
-
-Cloud SDK  
-cli for GCP products
-
--   `gcloud` manages authentication, local configuration, developer
-    workflow, and interactions with cloud platforms apis
-
--   bq :: big query through the command line
-
--   kubectl :: management of kubernetes
-
--   gsutil :: command line access to manage cloud storage buckets and
-    objects
-
--   powershell tools (which I will never use)
-
-## [Container Registry](https://cloud.google.com/container-registry/)
-
-More than a private docker repository.
-
--   secure private registry
--   automatically build and push images to private registry
--   vulnerability scanning
--   multiple registries
--   fast and highly available
--   prevent deployment of images that are risky and not allowed
-
-Allows:
-
--   project names images
--   domain named images
--   access control
--   authentication `gcloud docker -a` to use authenticate with gcp
-    credentials
--   `mirror.gcr.io` mirrors docker registry
--   notifications when container images change
--   vulnerability monitoring
-
-## [Cloud Build](https://cloud.google.com/cloud-build/)
-
-Cloud Build lets you commit to deploy in containers quickly.
-
--   stages: build, test, deploy
--   push changes from Github, cloud source repositories, or bitbucket
--   run builds on high cpu vms
--   automate deployment
--   custom workflows
--   privacy
--   integrations with GKE, app engine, cloud functions, and firebase
--   spinnaker supported on all clouds - 120 build minutes per day.
-
-YAML file to specify build.
-
-## [Cloud Source Repositories](https://cloud.google.com/source-repositories/)
-
--   unlimited private git repositories
--   build in continuous integration (automatic build and testing)
--   fast code search
--   pub/sub notification
--   permissions
--   logging with stackdriver
--   prevent security keys from being commit.
-
-## [Cloud Scheduler](https://cloud.google.com/scheduler/)
-
-CRON job scheduler. Batch and big data jobs, cloud infrastructure
-operations. Automate everything retries, manage all automated tasks in
-one place.
-
-Serverless scheduling. Cloud scheduler. HTTP or pub/sub tasks up to 1
-minutes intervals.
-
 # Data Analytics
 
-## [Big Query](https://cloud.google.com/bigquery/)
+## [Cloud BigQuery](https://cloud.google.com/bigquery/)
 
 Free up to 1 TB of data analyzed each month and 10 GB stored. High availability, support SQL and federated data.
 
@@ -691,6 +348,11 @@ Data in Big Query Can be loaded in:
 - Clustering: data with a particular cluster key is stored together. to further reduce scan of unnecessary data.
 - Slots: unit of computational capacity required to execute SQL query
 
+### Pricing
+
+- On-demand pricing. With this pricing model, you are charged for the number of bytes processed by each query. The first 1 TB of query data processed per month is free
+- Flat-rate pricing. With this pricing model, you purchase slots, which are virtual CPUs. When you buy slots, you are buying dedicated processing capacity that you can use to run queries
+
 ### Best Practices
 
 #### Controlling Cost
@@ -706,19 +368,22 @@ Data in Big Query Can be loaded in:
 #### Performance
 
 - Input data and data sources
-    - Prune partitioned queries
     - Denormalise data whenever possible
     - use external data sources apporiately
     - avoid excessive wildcard tables
 - Query computation
     - avoid repeated transforming data via SQL queries
     - avoid JavaScripted user-defined functions
-    - order query operations to maximize performance
-    - optimize JOIN patterns
+    - Use approximate aggregation functions: e.g. instead of using `COUNT(DISTINCT)`, use `APPROX_COUNT_DISTINCT()`
+    - order query operations to maximize performance: Use ORDER BY only in the outermost query or within window clauses (analytic functions). Push complex operations to the end of the query
+    - optimize JOIN patterns: large table as the left side of the JOIN and a small one on the right side of the JOIN
+    - Prune partitioned queries: When querying a partitioned table, use the `_PARTITIONTIME` pseudo column to filter the partitions.
 - SQL anti-patterns
 
 ### Security
-
+- Dataset level
+- Table ACL: tables and views
+- Restrict access to columns 
 - Cloud Data Loss Prevention (DLP) to protect sensitive data
 - Cloud Key Management Service
 
@@ -758,6 +423,7 @@ Driver program defines pipeline, is submitted to a Runner for processing.
     -   Preemptible VMs
 -   Migrating MapReduce to dataflow
 -   With Cloud Pub/Sub Seek to replay
+-   `Cancel` will shut down the pipeline without allowing buffered jobs to complete. `Drain` will stop new data from flowing in but will leave the processing pipeline running to process buffered data
 
 ## [Cloud Dataproc](https://cloud.google.com/dataproc/)
 
@@ -765,7 +431,7 @@ Managed apache hadoop and apache spark instances. ETL pipeline (Extract Transfor
 
 Support native connectors: Cloud Storage, BigQuery and Cloud BigTable
 
-Autoscaling is not recommended with/for HDFS, YARN Node Labels, Spark Structured Streaming or Idle Clusters
+Autoscaling is not recommended with/for **HDFS, YARN Node Labels, Spark Structured Streaming or Idle Clusters**
 
 ### Cluster Types
 - Single-node: master and workers are on the same VM
@@ -777,9 +443,7 @@ Autoscaling is not recommended with/for HDFS, YARN Node Labels, Spark Structured
 
 Jupyter notebooks + magiks that working google cloud.
 
-Big query integration
-
-Gcloud console commands
+Cloud Datalab instances are single-user environments, therefore each member of your team needs their own instance. Synchronize changes to the shared Cloud Source Repository enables team sharing.
 
 ## [Cloud Pub/Sub](https://cloud.google.com/pubsub/)
 
@@ -848,45 +512,11 @@ Task orchestration system. Managed Apache airflow. Every workflow is defined as 
 - Airflow Connections: default to BigQuery, Datastore, Cloud Storage, Generic
 
 
-## [Genomics](https://cloud.google.com/genomics/)
-
-Process in parallel.
-
--   fully integrated with GCP products
--   secured with hippa compliant
--   real time processing
-
-## [Google analytics 360 Studio](https://marketingplatform.google.com/about/enterprise/#?modal_active=none)
-
-Enterprise analytics (not going to dive deaply into).
-
--   understand customer decision better
--   used google adertising system
--   adwords
--   doubleclick
--   allows easy collaboration
--   tag manager
-    -   manage analytics tags
--   optimize
-    -   personalized messages to audience (text change to website
-        measure best variant)
--   google audience
-    -   recognize who your most valuable audiences are
--   attriubtion
-    -   shows how your messages are converged
--   data studio
-    -   data import and data visualization from big query
-    -   custom reports
--   surveys
-    -   accurate surveys to send out
-    -   brand awareness
-
 ## [Google Data Studio](https://marketingplatform.google.com/about/data-studio/)
 
-Unite data in one place: spreadsheets, analytics, google ads, big query
-all combined Explore the data
+Unite data in one place: spreadsheets, analytics, google ads, big query all combined Explore the data
 
--   connectors: many many services including community ones
+-   connectors: many many services including community ones. Different data connectors in Data Studio have different refresh rates. In between data refreshes, Data Studio will use its cache to present data. The cache can be **manually refreshed** however.
 -   transformation
 -   you can cache queries from big query.
     -   big query can cache results temporarily or using a new table
@@ -904,12 +534,20 @@ users.
 
 # AI and Machine Learning
 
-## [AI Hub](https://cloud.google.com/ai-hub/)
+## [AI Platform](https://cloud.google.com/ai-platform)
 
-A collection of end-to-end AI pipelines and out of the box algorithms
-for solving specific machine learning problems.
+Use AI Platform to train your machine learning models at scale, to host your trained model in the cloud, and to use your model to make predictions about new data.
+You can host your trained machine learning models in the cloud and use AI Platform Prediction to infer target values for new data. You can use AI Platform Training to run your TensorFlow, scikit-learn, and XGBoost training applications in the cloud
 
-Prebuilt solutions. Very much a pre alpha product.
+- Reinforcement learning: uses reward systems to complete a task
+- Unsupervised learning: does not use labels but does look for patterns (or clustering) of data in order to make predictions based on the patterns it learns
+- Supervised learning takes labeled training data to predict future results on new test data
+
+## [Deep Learning VM](https://cloud.google.com/deep-learning-vm/)
+
+Deep Learning VM Images images are virtual machine images optimized for data science and machine learning tasks. All images come with key ML frameworks and tools pre-installed, and can be used out of the box on instances with GPUs to accelerate your data processing tasks
+
+A deep neural network is simply a feed-forward network with many hidden layers. Wider networks can approximate more interactions between input variables. Wide models are used for memorization. Deep models are for generalization. Deep and wide models are ideal for a recommendation application.
 
 ## [Cloud AutoML](https://cloud.google.com/automl/)
 
@@ -925,30 +563,6 @@ Limited experience to train and make predictions. Full rest api andscalably trai
 -   Structured Data: Tables
     -   Online predictions
     -   Batch predictions:  make an asynchronous request for a batch of predictions using the batchPredict method
-
-## [Cloud TPU](https://cloud.google.com/tpu/)
-
-Much faster for machine learning computations and numerical algorithms.
-
-## [Cloud Machine Learning Engine](https://cloud.google.com/ml-engine/)
-
-Focus on models not operations.
-
--   multiple frameworks built in
-    -   scikit-klearn, xgboost, keas, tensorflow
--   automate hyperparameter search
--   automate resource provisioning
--   train with small models for development and easily scale up
--   send computations to the cloud
--   cloud ml engine works with cloud dataflow
-
-Manage model version.
-
-gcloud commands work with it.
-
-## [Cloud Talent Solution](https://cloud.google.com/solutions/talent-solution/)
-
-Machine learning to solve the job search
 
 ## [Dialog Flow](https://cloud.google.com/dialogflow-enterprise/)
 
