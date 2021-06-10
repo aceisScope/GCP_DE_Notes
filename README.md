@@ -532,20 +532,38 @@ An intelligent cloud data service to visually explore, clean, and prepare data f
 
 # AI and Machine Learning
 
+## [Machine Learning Basics](https://developers.google.com/machine-learning/glossary/#l)
+
+### Concepts
+- feature: An input variable used in making predictions.
+- hyperparameter: The "knobs" that you tweak during successive runs of training a model. For example, batch size, training epochs, number of hidden layers, regularizaiton types, regularization rate and learning rate
+- label: In supervised learning, the "answer" or "result" portion of an example
+- overfitting: Creating a model that matches the training data so closely that the model fails to make correct predictions on new data. How to avoid: Early stopping, Train with more data, Data augmentation, Feature selection, Regularization, Ensemble methods, Cross-validation (k-folds), Dropout layers (neural networks)
+    - L1 regularization: penalizes weights in proportion to the sum of the absolute values of the weights. helps drive the weights of irrelevant or barely relevant features to exactly 0, which removes those features from the model
+    - L2 regularization: penalizes weights in proportion to the sum of the squares of the weights. helps drive outlier weights (those with high positive or low negative values) closer to 0 but not quite to 0
+
+### Types:
+- supervised machine learning: Training a model from input data and its corresponding labels.
+- unsupervised machine learning: Training a model to find patterns in a dataset, typically an unlabeled dataset.
+- reinforcement: concerns with how intelligent agents ought to take actions in an environment in order to maximize the notion of cumulative reward
+
+### Deep Learning:
+- neuron: A node in a neural network, typically taking in multiple input values and generating one output value
+- epoch: A full training pass over the entire dataset such that each example has been seen once. Thus, an epoch represents N/batch size training iterations, where N is the total number of examples.
+- activation function: A function (for example, ReLU or sigmoid) that takes in the weighted sum of all of the inputs from the previous layer and then generates and passes an output value (typically nonlinear) to the next layer.
+- layer: A set of neurons in a neural network that process a set of input features, or the output of those neurons. Input layer, hidden layers, output layer
+- Deep neural network: A type of neural network containing multiple hidden layers. A deep neural network is simply a feed-forward network with many hidden layers. Deep models are for generalization.
+- Wide neural network: A linear model that typically has many sparse input features. Wider networks can approximate more interactions between input variables. Wide models are used for memorization.  Deep and wide models are ideal for a recommendation application.
+
 ## [AI Platform](https://cloud.google.com/ai-platform)
 
 Use AI Platform to train your machine learning models at scale, to host your trained model in the cloud, and to use your model to make predictions about new data.
 You can host your trained machine learning models in the cloud and use AI Platform Prediction to infer target values for new data. You can use AI Platform Training to run your TensorFlow, scikit-learn, and XGBoost training applications in the cloud
 
-- Reinforcement learning: uses reward systems to complete a task
-- Unsupervised learning: does not use labels but does look for patterns (or clustering) of data in order to make predictions based on the patterns it learns
-- Supervised learning takes labeled training data to predict future results on new test data
-
 ## [Deep Learning VM](https://cloud.google.com/deep-learning-vm/)
 
 Deep Learning VM Images images are virtual machine images optimized for data science and machine learning tasks. All images come with key ML frameworks and tools pre-installed, and can be used out of the box on instances with GPUs to accelerate your data processing tasks
 
-A deep neural network is simply a feed-forward network with many hidden layers. Wider networks can approximate more interactions between input variables. Wide models are used for memorization. Deep models are for generalization. Deep and wide models are ideal for a recommendation application.
 
 ## [Cloud AutoML](https://cloud.google.com/automl/)
 
