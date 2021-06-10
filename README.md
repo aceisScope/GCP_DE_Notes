@@ -380,6 +380,10 @@ Data in Big Query Can be loaded in:
     - Prune partitioned queries: When querying a partitioned table, use the `_PARTITIONTIME` pseudo column to filter the partitions.
 - SQL anti-patterns
 
+#### Optimizing storage
+
+Best practice: Keep your data in BigQuery. Rather than exporting your older data to another storage option (such as Cloud Storage), take advantage of BigQuery's long-term storage pricing. If you have a table that is not edited for 90 consecutive days, the price of storage for that table automatically drops to the same cost as Cloud Storage Nearline.
+
 ### Security
 - Dataset level
 - Table ACL: tables and views
@@ -405,7 +409,10 @@ Driver program defines pipeline, is submitted to a Runner for processing.
     -   Per Session: created in a stream when there is an interruption in the flow of the events which exceeds a certain time period. applied on a per-key basis. useful for irregular distributed data.
     -   Single global
 -   Watermarks: is the system's notion of when all data in a certain window can be expected to have arrived in the pipeline
--   Triggers: determine when to emit aggregated results as data arrives. For bounded data, results are emitted after all of the input has been processed. For unbounded data, results are emitted when the watermark passes the end of the window. E.g. event time trigger, processing time trigger, data-driven trigger, composite trigger
+-   Triggers: determine when to emit aggregated results as data arrives. For bounded data, results are emitted after all of the input has been processed. For unbounded data, results are emitted when the watermark passes the end of the window. 
+    -   event time trigger
+    -   processing time trigger
+    -   number of data elements in a collection
 
 ### Access control
 
@@ -458,9 +465,7 @@ Can trigger events such as Cloud Dataflow.
 -   exactly once processing
 -   no provisioning
 -   integration with cloud storage, gmail, cloud functions etc.
--   open apis and client libraries in many languages
 -   globally trigger events
--   pub/sub is hipaa compliant.
 -   Seeking: to alter the state of acknowledgement of messages in bulk. For example, you can seek to a timestamp in the past, and all messages received after that time will be marked as unacknowledged
 -   Snapshot: are used in seeking as an alternative to a timestamp. You need to create a snapshot at a point in time, and that snapshot will retain all messages that were unacknowledged at the point of the snapshot's creation, accessing telemetry or metrics
 
@@ -521,16 +526,9 @@ Unite data in one place: spreadsheets, analytics, google ads, big query all comb
 -   you can cache queries from big query.
     -   big query can cache results temporarily or using a new table
 
-## [Firebase Performance Monitoring](https://firebase.google.com/products/performance/)
+## [Google Dataprep](https://cloud.google.com/dataprep)
 
-Monitoring loading experience for users.
-
--   wide variety of locations
--   wide variaty of
--   variaty, location, device, etc.
-
-SDK in app you get performance metrics of your app as seen from the
-users.
+An intelligent cloud data service to visually explore, clean, and prepare data for analysis and machine learning
 
 # AI and Machine Learning
 
