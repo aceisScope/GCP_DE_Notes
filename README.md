@@ -76,13 +76,6 @@ vCPUs are reached.
 
 Persistent disks have built-in redundancy.
 
-## [Cloud Storage for Firebase](https://firebase.google.com/products/storage/) (Object)
-
-Free to get started. Uses google cloud storage behind the scenes. Easy
-way to provide access to files to users based on authentication. Trigger
-functions to process these files. Clients provides sdks for reliable
-uploads on spotty connections. Targets mobile.
-
 ## [Cloud Filestore](https://cloud.google.com/filestore/) (Filesystem)
 
 Cloud Filestore is a managed file storage service (NAS).
@@ -99,10 +92,6 @@ Cloud filestore exists in the zone that you are using.
 
 Is an NFS fileshare.
 
-## [Drive Enterprise](https://cloud.google.com/drive-enterprise/) (Google Drive)
-
-$8 per active user/month + $0.04 per GB/month and includes Google Docs,
-Sheets, and Slides.
 
 # Migration
 
@@ -259,6 +248,7 @@ Eventually consistent. Not for relational data but storing objects.
     -   array and map
     -   *reference*
 -   Automatically create single-field indexes
+-   Composite indexes: A composite index stores a sorted mapping of all the documents in a collection, based on an ordered list of fields to index.
 -   Atomic transactions. Cloud Firetore can execute a set of operations
     where either all succeed, or none occur.
 -   High availability of reads and writes. Cloud Firetore runs in
