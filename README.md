@@ -236,6 +236,8 @@ Relational Semantics requiring explicit key.
 
 Highly available transactions. Globally replicated.
 
+Cloud Spanner automatically creates an index for each table's primary key. You can also create _secondary indexes_ for other columns
+
 ## [Cloud Firetore](https://cloud.google.com/firestore/) (NoSQL, like MongoDB)
 
 NoSQL document store. Realtime DB with mobile SDKs. SQL like query language. ACID transactions. Fully managed.
