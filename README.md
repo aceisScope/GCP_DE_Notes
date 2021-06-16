@@ -346,6 +346,7 @@ Data in Big Query Can be loaded in:
 
 ### Pricing
 
+- BigQuery charges for storage, queries, and streaming inserts
 - On-demand pricing. With this pricing model, you are charged for the number of bytes processed by each query. The first 1 TB of query data processed per month is free
 - Flat-rate pricing. With this pricing model, you purchase slots, which are virtual CPUs. When you buy slots, you are buying dedicated processing capacity that you can use to run queries
 
@@ -375,6 +376,7 @@ Data in Big Query Can be loaded in:
     - optimize JOIN patterns: large table as the left side of the JOIN and a small one on the right side of the JOIN
     - Prune partitioned queries: When querying a partitioned table, use the `_PARTITIONTIME` pseudo column to filter the partitions.
 - SQL anti-patterns
+- Using cached query results: BigQuery writes all query results to a table. The table is either explicitly identified by the user (a destination table), or it is a temporary, cached results table. Caches are valid for 24hrs. 
 
 #### Optimizing storage
 
@@ -386,6 +388,7 @@ Best practice: Keep your data in BigQuery. Rather than exporting your older data
 - Restrict access to columns 
 - Cloud Data Loss Prevention (DLP) to protect sensitive data
 - Cloud Key Management Service
+- Basic roles for projects: Viewer, Editor, Owner; Basic roles for datasets: READER, WRITER, OWNER
 
 ## [Cloud Dataflow](https://cloud.google.com/dataflow/)
 
