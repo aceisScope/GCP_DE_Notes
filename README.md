@@ -144,6 +144,8 @@ install storage locally move data and send to google
 
 Transactions.
 
+Up to 30TB.
+
 Fully manged MYSQL and Postgresql service. Susstained usage discount.
 Data replication between zones in a region.
 
