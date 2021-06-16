@@ -339,6 +339,8 @@ Data in Big Query Can be loaded in:
     - partitioned tables: partition based on TIMESTAMP or DATE column
 - Clustering: data with a particular cluster key is stored together. to further reduce scan of unnecessary data.
 - Slots: unit of computational capacity required to execute SQL query
+- Time travel: you can query a snapshot of a table from any point in time within the previous seven days by using a `FOR SYSTEM_TIME AS OF` clause
+- [Large-scale mutations](https://cloud.google.com/blog/products/bigquery/performing-large-scale-mutations-in-bigquery) 
 
 ### Pricing
 
