@@ -540,6 +540,14 @@ An intelligent cloud data service to visually explore, clean, and prepare data f
 - overfitting: Creating a model that matches the training data so closely that the model fails to make correct predictions on new data. How to avoid: Early stopping, Train with more data, Data augmentation, Feature selection, Regularization, Ensemble methods, Cross-validation (k-folds), Dropout layers (neural networks)
     - L1 regularization: penalizes weights in proportion to the sum of the absolute values of the weights. helps drive the weights of irrelevant or barely relevant features to exactly 0, which removes those features from the model
     - L2 regularization: penalizes weights in proportion to the sum of the squares of the weights. helps drive outlier weights (those with high positive or low negative values) closer to 0 but not quite to 0
+- Feature engineering: 
+    - Missing data: Ignore, Remove, Impute
+    - Outliers and feature clipping
+    - One-hot encoding
+    - Linear scaling
+    - Z-score
+    - Log scaling
+    - Bucketing
 
 ### Types:
 - supervised machine learning: Training a model from input data and its corresponding labels.
