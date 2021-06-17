@@ -343,6 +343,10 @@ Data in Big Query Can be loaded in:
 - Slots: unit of computational capacity required to execute SQL query
 - Time travel: you can query a snapshot of a table from any point in time within the previous seven days by using a `FOR SYSTEM_TIME AS OF` clause
 - [Large-scale mutations](https://cloud.google.com/blog/products/bigquery/performing-large-scale-mutations-in-bigquery) 
+- [Loading data](https://cloud.google.com/bigquery/docs/loading-data#loading_encoded_data):
+    - Batch or stream
+    - Format:  Avro, ORC, Parquet, CSV & JSON (provide an explicit schema, or you can use schema auto-detection)
+    - Encoding: BigQuery supports UTF-8 encoding for both nested or repeated and flat data. BigQuery supports ISO-8859-1 encoding for flat data only for CSV files.
 
 ### Pricing
 
@@ -427,9 +431,9 @@ Driver program defines pipeline, is submitted to a Runner for processing.
     -   Advanced scheduling
     -   Cloud Dataflow Shuffle service
     -   Preemptible VMs
--   Migrating MapReduce to dataflow
 -   With Cloud Pub/Sub Seek to replay
 -   `Cancel` will shut down the pipeline without allowing buffered jobs to complete. `Drain` will stop new data from flowing in but will leave the processing pipeline running to process buffered data
+-   Pushing data to multiple storage locations: use Bigtable and BigQueryIO transforms on PCollection
 
 ## [Cloud Dataproc](https://cloud.google.com/dataproc/)
 
@@ -443,6 +447,9 @@ Autoscaling is not recommended with/for **HDFS, YARN Node Labels, Spark Structur
 - Single-node: master and workers are on the same VM
 - Standard: A master VM (YARN resource manager and HDFS name node) and worker VMs (YARN node manager and HDFS data node). can also add preemptible workers, but these workers don't store HDFS data.
 - High-availability: Three master VMs and multiple workder VMs (autoscaling doesn't work with HA type)
+
+### Migrating Hadoop Jobs from On-Premises to Datapro
+[https://cloud.google.com/architecture/hadoop/hadoop-gcp-migration-jobs](https://cloud.google.com/architecture/hadoop/hadoop-gcp-migration-jobs)
 
 
 ## [Cloud Datalab](https://cloud.google.com/datalab/)
@@ -613,12 +620,9 @@ AutoML Natural Language.
 
 ## [Cloud Speech to Text](https://cloud.google.com/speech-to-text/)
 
-Google Cloud Speech-to-Text enables developers to convert audio to text
-by applying powerful neural network models in an easy-to-use API. The
-API recognizes 120 languages and variants to support your global user
-base. You can enable voice command-and-control, transcribe audio from
-call centers, and more. It can process real-time streaming or
-prerecorded audio, using Google’s machine learning technology.
+Synchronous speech recognition returns the recognized text for short audio (less than ~1 minute) in the response as soon as it is processed.
+
+Streaming speech recognition allows you to stream audio to Speech-to-Text and receive a stream speech recognition results in real time as the audio is processed. Streaming speech recognition is available via **gRPC** only.
 
 ## [Cloud Text-to-Speech](https://cloud.google.com/text-to-speech/)
 
@@ -645,7 +649,7 @@ on your use case.
 - Cropping hints
 - Face detection: faces, emotional states, hatware etc
 - Image property detection
-- Label detection: objects, locations, etc
+- Label detection: objects, locations, etc, sending the contents of the image file as a **base64 encoded string** in the body of your request.
 - Landmark detection
 - Logo detection
 - Explicit content detection
