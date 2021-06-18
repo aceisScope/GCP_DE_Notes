@@ -46,6 +46,8 @@ Encrypt objects with your own encryption keys (locally)
 
 Encrypt objects using Cloud Key Management Storage
 
+Avoid using sequential filenames such as timestamp-based filenames if you are uploading many files in parallel.
+
 Controlling Access:
 
 -   `AllUsers:R` makes an object world readable
@@ -164,7 +166,10 @@ Data replication between zones in a region.
     -  Extensions   
 -   Instance cloning.
 -   Integration with Stackdriver logging and monitoring.
--   ISO/IEC 27001 compliant.
+-   Cloud SQL Auth proxy: without the need for Authorized networks or for configuring SSL. Requirements: 
+    -  Cloud SQL instance name and region
+    -  credentials it will use to authenticate your application to Cloud SQL
+    -  port it listens to for data
 
 Some statements and features are not supported.
 
@@ -503,7 +508,7 @@ recieves messages on a specified subscription.
 ### Access Control
 
 - Use service accounts for authorization
-- Grant per-topic or per-subscription permissions
+- Grant **per-topic** or **per-subscription** permissions
 - Grant limited access to publish or consume messages
 
 ## [Cloud Composer](https://cloud.google.com/composer/)
@@ -529,8 +534,8 @@ Unite data in one place: spreadsheets, analytics, google ads, big query all comb
 
 -   connectors: many many services including community ones. Different data connectors in Data Studio have different refresh rates. In between data refreshes, Data Studio will use its cache to present data. The cache can be **manually refreshed** however.
 -   transformation
--   you can cache queries from big query.
-    -   big query can cache results temporarily or using a new table
+-   you can cache queries from big query. Select the enable cache checkbox in report settings. Also, use the owner's credentials to access the source data.
+
 
 ## [Google Dataprep](https://cloud.google.com/dataprep)
 
