@@ -577,7 +577,22 @@ An intelligent cloud data service to visually explore, clean, and prepare data f
 ## [AI Platform](https://cloud.google.com/ai-platform)
 
 Use AI Platform to train your machine learning models at scale, to host your trained model in the cloud, and to use your model to make predictions about new data.
-You can host your trained machine learning models in the cloud and use AI Platform Prediction to infer target values for new data. You can use AI Platform Training to run your TensorFlow, scikit-learn, and XGBoost training applications in the cloud
+You can host your trained machine learning models in the cloud and use AI Platform Prediction to infer target values for new data. You can use AI Platform Training to run your TensorFlow, scikit-learn, and XGBoost training applications in the cloud. 
+
+### Batch vs Online
+Online prediction: 
+    - Optimized to minimize the latency of serving predictions.
+    - Predictions returned in the response message.
+    - Input data passed directly as a JSON string.
+    - Returns as soon as possible.
+    - Runs models deployed to AI Platform Prediction.
+    
+Batch prediction:
+    - Optimized to handle a high volume of instances in a job and to run more complex models
+    - Predictions written to output files in a Cloud Storage location that you specify.
+    - Input data passed indirectly as one or more URIs of files in Cloud Storage locations.
+    - Asynchronous request.
+    - Runs models deployed to AI Platform Prediction or models stored in accessible Google Cloud Storage locations.
 
 ## [Deep Learning VM](https://cloud.google.com/deep-learning-vm/)
 
