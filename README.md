@@ -34,7 +34,7 @@ Object Lifecycle Mangement
 Advanced Features:
 
 -   Requester Pays: you can enable requester of resources for pay for transfer.
--   Parallel uploads of composite objects
+-   **Parallel uploads** of composite objects, e.g. large media files
 -   Integrity checking: MD5 hash
 -   Transcoding: gzip
 
@@ -62,10 +62,7 @@ Controlling Access:
 
 ## [Persistent Disk](https://cloud.google.com/persistent-disk/) (Block)
 
-Durable and high performance block storage. SSD and HHD available. Can
-be attached to any compute engine instance or as google kubernetes
-storage volumes. Transparently resized and easy backups. Both can be up
-to 64 TB in size. More expensive per GB than storage. No charge for IO.
+Durable and high performance block storage. SSD and HHD available. Can be attached to any compute engine instance or as google kubernetes storage volumes. Transparently resized and easy backups. Both can be up to 64 TB in size. More expensive per GB than storage. No charge for IO. SAN can be migrated to persistent disk, while NAS could map to either persistent disk or Cloud Storage.
 
 -   zonal persistent HHD and SSD (efficient reliable block storage)
 -   regional peristent disk HHD and SSD. Replicated in two zones
@@ -102,8 +99,7 @@ Covers sending files to google.
 ## Data Transfer (Online Transfer)  
 Use your network to move data to Google Cloud storage
 
--   [draga and
-    drop](https://cloud.google.com/storage/docs/cloud-console#_uploadingdata)
+-   [draga and drop](https://cloud.google.com/storage/docs/cloud-console#_uploadingdata)
 -   gsutil
 -   json api inject tool (python api for example)
 
@@ -175,7 +171,7 @@ Some statements and features are not supported.
 
 ## [Cloud BigTable](https://cloud.google.com/bigtable/) (NoSQL similar to Cassandra HBASE)
 
-Managed wide-column NoSQL database. High throughput. Low latency. Scalibility. High availability. Apache HBase API.
+Managed wide-column NoSQL database. High throughput. Low latency. Scalibility. High availability. Apache HBase API. Recommended minimum amount of data to store in Bigtable is 1GB.
 
 ### Data Model
 -   Row key: the only index
@@ -219,10 +215,11 @@ Managed wide-column NoSQL database. High throughput. Low latency. Scalibility. H
         -   SSD: reads up to up to 10,000 rps.
         -   HDD: up to 500 rps. storing at least 10TB of infrequently-accessed data with no latency sensitivity
         -   one can't change the disk type on an existing Bigtable instance
+        -   Choosing between SSD and HDD storage: SSD storage is the most efficient and cost-effective choice for most use cases. HDD storage is sometimes appropriate for very large data sets (>10 TB) that are not latency-sensitive or are infrequently accessed.
     -   Application profiles: Custome application-specific settings for handling income connections. Single or multi-cluster routing. **Single-row transactions (atomic update to single row) support requies single cluster routing for strong consistency**.    
 -   Cluster: inside instance, contains nodes. To achieve multi-zone redundancy is to run additional clusters in different zones in the same instance. Up to 30 clusters per project.
--   Data storage: tablets in Coogle Colossus
-
+-   Data storage: tablets in Coogle Colossus. 
+ 
 ### Monitoring
 
 - CPU overload: for single-cluster instance, average CPU load should be under 70%, hottest node not going over 90%. For two clusters, 35% and 45% respectively.
@@ -247,7 +244,7 @@ Cloud Spanner automatically creates an index for each table's primary key. You c
 
 ## [Cloud Firetore](https://cloud.google.com/firestore/) (NoSQL, like MongoDB)
 
-NoSQL document store. Realtime DB with mobile SDKs. SQL like query language. ACID transactions. Fully managed.
+NoSQL document store. Realtime DB with mobile SDKs. SQL like query language. ACID transactions. Fully managed. Scales down to zero and up to several TB.
 
 Eventually consistent. Not for relational data but storing objects.
 
@@ -256,36 +253,16 @@ Eventually consistent. Not for relational data but storing objects.
     -   bytes, date and time, geographical point
     -   array and map
     -   *reference*
--   Automatically create single-field indexes
--   Composite indexes: A composite index stores a sorted mapping of all the documents in a collection, based on an ordered list of fields to index.
--   Atomic transactions. Cloud Firetore can execute a set of operations
-    where either all succeed, or none occur.
--   High availability of reads and writes. Cloud Firetore runs in
-    Google data centers, which use redundancy to minimize impact from
-    points of failure.
--   Massive scalability with high performance. Cloud Firetore uses a
-    distributed architecture to automatically manage scaling. Cloud
-    Datastore uses a mix of indexes and query constraints so your
-    queries scale with the size of your result set, not the size of your
-    data set.
--   Flexible storage and querying of data. Cloud Firetore maps
-    naturally to object-oriented and scripting languages, and is exposed
-    to applications through multiple clients. It also provides a
-    SQL-like query language.
--   Balance of strong and eventual consistency. Cloud Firetore ensures
-    that entity lookups by key and ancestor queries always receive
-    strongly consistent data. All other queries are eventually
-    consistent. The consistency models allow your application to deliver
-    a great user experience while handling large amounts of data and
-    users.
--   Encryption at rest. Cloud Firetore automatically encrypts all data
-    before it is written to disk and automatically decrypts the data
-    when read by an authorized user. For more information, see
-    Server-Side Encryption.
--   Fully managed with no planned downtime. Google handles the
-    administration of the Cloud Firetore service so you can focus on
-    your application. Your application can still use Cloud Datastore
-    when the service receives a planned upgrade.
+-   Automatically create single-field indexes. Balance of strong and eventual consistency. 
+-   Indexing
+    -   Built-in indexes: By default, a Datastore mode database automatically predefines an index for each property of each entity kind.
+    -   Composite indexes: A composite index stores a sorted mapping of all the documents in a collection, based on an ordered list of fields to index. 
+    -   No need to maintain index entries for that property that will never have to filter or sort on.
+    -   Avoid exploding indexes by avoiding queries that would require a custom index using a list property, see [here](https://cloud.google.com/appengine/docs/standard/python/datastore/indexes#index-limits)
+-   Atomic transactions. Cloud Firetore can execute a set of operations where either all succeed, or none occur.
+-   High availability of reads and writes. 
+-   Encryption at rest. 
+-   Fully managed with no planned downtime. 
 -   Realtime update: `on_snapshot` function listens for updates and callbacks can act on updates
 
 ## [Cloud Memorystore](https://cloud.google.com/memorystore/) (redis)
@@ -462,6 +439,8 @@ Autoscaling is not recommended with/for **HDFS, YARN Node Labels, Spark Structur
 Jupyter notebooks + magiks that working google cloud.
 
 Cloud Datalab instances are single-user environments, therefore each member of your team needs their own instance. Synchronize changes to the shared Cloud Source Repository enables team sharing.
+
+`datalab create` creates a new Datalab instance running in a Google Compute Engine VM. This command also creates the datalab-network network if necessary.
 
 ## [Cloud Pub/Sub](https://cloud.google.com/pubsub/)
 
